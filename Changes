@@ -1,0 +1,8 @@
+Revision history for Perl extension Alter.
+
+0.01  Fri May 25 05:47:40 2007
+	- original version; created by h2xs 1.23 with options
+		-A -n Alter
+
+0.02  Sat Jul  7 21:17:28 CEST 2007
+        - Released on CPAN
