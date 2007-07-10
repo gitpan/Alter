@@ -2,7 +2,6 @@
 #include "perl.h"
 #include "XSUB.h"
 #define NEED_newRV_noinc
-#define NEED_PL_unitcheckav
 #include "ppport.h"
 
 /* id-key for ext magic (Hi, Eva, David) */
@@ -60,6 +59,14 @@ SV *ALT_vivify( char *class) {
         return NULL;
     }
 }
+
+/*
+void is_xs()
+PPCODE:
+    ST(0) = newSViv(1);
+    sv_2mortal(ST(0));
+    XSRETURN(1);
+*/
 
 MODULE = Alter		PACKAGE = Alter		
 
@@ -123,9 +130,3 @@ CODE:
         hv_delete(type_tab, class, strlen(class), G_DISCARD);
     }
     XSRETURN_EMPTY;
-
-int is_xs()
-CODE:
-    PERL_UNUSED_VAR(targ);
-    PERL_UNUSED_VAR(RETVAL);
-    XSRETURN_YES;

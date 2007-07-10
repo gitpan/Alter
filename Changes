@@ -6,3 +6,9 @@ Revision history for Perl extension Alter.
 
 0.02  Sat Jul  7 21:17:28 CEST 2007
         - Released on CPAN
+
+0.03 Tue Jul 10 21:14:00 CEST 2007
+        - Bad test report (bleadperl under linux)
+          Dodged by re-writing is_xs() in Perl
+          (The trivial is_xs() is strangely hard to make portable)
+          Minor pod fixes

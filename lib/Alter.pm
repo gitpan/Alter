@@ -2,7 +2,7 @@ package Alter;
 use 5.008000;
 use strict; use warnings;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 our %EXPORT_TAGS = (
     all => [ qw(
@@ -23,10 +23,12 @@ eval {
     die "Pure Perl requested" if $ENV{ PERL_ALTER_NO_XS}; # fake load failure
     require XSLoader;
     XSLoader::load('Alter', $VERSION);
+    *is_xs = sub { 1 };
 };
 if ( $@ ) {
     # Fallback to pure perl implementation
     require Alter::AlterXS_in_perl if $@;
+    *is_xs = sub { 0 };
 }
 
 ### Import/Export
@@ -180,7 +182,7 @@ __END__
 
 =head1 NAME
 
-Alter - I<Alter Ego> Objects
+Alter - Alter Ego Objects
 
 =head2 Synopsis
 
