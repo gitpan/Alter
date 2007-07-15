@@ -136,7 +136,7 @@ my $n_tests;
 ### Storable with STORABLE_attach
 # ... if available, otherwise STORABLE_thaw is tested (and again below)
 
-use constant PRE_ATTACH => 5.008007;
+use constant HAS_ATTACH => 2.16; # first Storable version with attach
 {
     use Storable;
 
@@ -148,14 +148,14 @@ use constant PRE_ATTACH => 5.008007;
     $Alter::Storable::thawing   = 0;
     my $clone = Storable::thaw( Storable::freeze( $cc));
 
-    if ( $] > PRE_ATTACH ) {
-        # Storable knows about STORABLE_attach
-        ok $Alter::Storable::attaching, "STORABLE_attach being used";
-        ok !$Alter::Storable::thawing, "STORABLE_thaw not used";
-    } else {
+    if ( $Storable::VERSION < HAS_ATTACH ) {
         # Storable only recogizese STORABLE_thaw
         ok $Alter::Storable::thawing,    "STORABLE_thaw being used";
         ok !$Alter::Storable::attaching, "STORABLE_attach not used";
+    } else {
+        # Storable knows about STORABLE_attach
+        ok $Alter::Storable::attaching, "STORABLE_attach being used";
+        ok !$Alter::Storable::thawing, "STORABLE_thaw not used";
     }
     is $clone->one_A, $one_A, "Cloned one_A (attach)";
     is $clone->one_B, $one_B, "Cloned one_B (attach)";

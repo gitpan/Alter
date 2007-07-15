@@ -12,3 +12,6 @@ Revision history for Perl extension Alter.
           Dodged by re-writing is_xs() in Perl
           (The trivial is_xs() is strangely hard to make portable)
           Minor pod fixes
+
+0.04 Sun Jul 15 12:02:42 CEST 2007
+        - better check for Storable's attac-awareness
