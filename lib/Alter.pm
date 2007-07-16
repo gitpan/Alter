@@ -2,7 +2,7 @@ package Alter;
 use 5.008000;
 use strict; use warnings;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 our %EXPORT_TAGS = (
     all => [ qw(

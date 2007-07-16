@@ -136,9 +136,9 @@ my $n_tests;
 ### Storable with STORABLE_attach
 # ... if available, otherwise STORABLE_thaw is tested (and again below)
 
-use constant HAS_ATTACH => 2.16; # first Storable version with attach
 {
     use Storable;
+    use constant HAS_ATTACH => 2.15; # first Storable version with attach
 
     my ( $one_A, $two_A) = ( 'haha', []);
     my ( $one_B, $two_B) = ( 'hihi', $two_A);
@@ -148,15 +148,20 @@ use constant HAS_ATTACH => 2.16; # first Storable version with attach
     $Alter::Storable::thawing   = 0;
     my $clone = Storable::thaw( Storable::freeze( $cc));
 
+    my $attach_fail;
     if ( $Storable::VERSION < HAS_ATTACH ) {
         # Storable only recogizese STORABLE_thaw
         ok $Alter::Storable::thawing,    "STORABLE_thaw being used";
         ok !$Alter::Storable::attaching, "STORABLE_attach not used";
+        $attach_ok = $Alter::Storable::thawing && !$Alter::Storable::attaching;
     } else {
         # Storable knows about STORABLE_attach
         ok $Alter::Storable::attaching, "STORABLE_attach being used";
         ok !$Alter::Storable::thawing, "STORABLE_thaw not used";
+        $attach_ok = !$Alter::Storable::thawing && $Alter::Storable::attaching;
     }
+    diag "Storable $Storable::VERSION" unless $attach_ok;
+
     is $clone->one_A, $one_A, "Cloned one_A (attach)";
     is $clone->one_B, $one_B, "Cloned one_B (attach)";
     isnt $clone->two_A, $two_A, "Cloned ref different (attach)";

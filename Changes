@@ -14,4 +14,8 @@ Revision history for Perl extension Alter.
           Minor pod fixes
 
 0.04 Sun Jul 15 12:02:42 CEST 2007
-        - better check for Storable's attac-awareness
+        - better check for Storable's attach-awareness
+
+0.05 Mon Jul 16 21:01:53 CEST 2007
+        - Another tester-FAIL with Storable's attach (grr)
+          Version number corrected, diag added in fail case
