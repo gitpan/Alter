@@ -148,7 +148,7 @@ my $n_tests;
     $Alter::Storable::thawing   = 0;
     my $clone = Storable::thaw( Storable::freeze( $cc));
 
-    my $attach_fail;
+    my $attach_ok;
     if ( $Storable::VERSION < HAS_ATTACH ) {
         # Storable only recogizese STORABLE_thaw
         ok $Alter::Storable::thawing,    "STORABLE_thaw being used";
