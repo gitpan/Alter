@@ -97,7 +97,7 @@ CODE:
 OUTPUT:
     RETVAL
 
-SV *ego(SV *obj)
+SV *ego(SV *obj, ...)
 PROTOTYPE: $
 CODE:
     HV *corona = ALT_corona(obj);

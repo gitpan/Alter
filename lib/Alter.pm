@@ -2,7 +2,7 @@ package Alter;
 use 5.008000;
 use strict; use warnings;
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 our %EXPORT_TAGS = (
     all => [ qw(
@@ -21,12 +21,14 @@ our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 eval {
     die "Pure Perl requested" if $ENV{ PERL_ALTER_NO_XS}; # fake load failure
+    no warnings 'redefine';
     require XSLoader;
     XSLoader::load('Alter', $VERSION);
     *is_xs = sub { 1 };
 };
 if ( $@ ) {
     # Fallback to pure perl implementation
+    no warnings 'redefine';
     require Alter::AlterXS_in_perl if $@;
     *is_xs = sub { 0 };
 }

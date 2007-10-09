@@ -19,3 +19,7 @@ Revision history for Perl extension Alter.
 0.05 Mon Jul 16 21:01:53 CEST 2007
         - Another tester-FAIL with Storable's attach (grr)
           Version number corrected, diag added in fail case
+
+0.07 Di Okt  9 23:29:14 CEST 2007
+        - changed ego() to accept (but ignore) more arguments than one
+          when prototype is overridden.

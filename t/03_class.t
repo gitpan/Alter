@@ -138,7 +138,7 @@ my $n_tests;
 
 {
     use Storable;
-    use constant HAS_ATTACH => 2.15; # first Storable version with attach
+    use constant HAS_ATTACH => 2.14; # first Storable version with attach
 
     my ( $one_A, $two_A) = ( 'haha', []);
     my ( $one_B, $two_B) = ( 'hihi', $two_A);
